@@ -3,10 +3,26 @@ import { useState } from "react"
 function App() {
 
   const [location, setLocation] = useState('')
+  const [weatherInfo, setWeatherInfo] = useState(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(location)
+
+    try {
+    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=Y25YYAL25FWSHQ2Y73MYKPR2E&contentType=json`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+    //console.log(data)
+    setWeatherInfo(data)
+  } catch (error) {
+    console.error(error);
+  }
+
   }
 
   const handleInputChange = (e) => {
@@ -22,6 +38,8 @@ function App() {
         </label>
         <button type="submit">Buscar</button>
       </form>
+
+      {weatherInfo ? weatherInfo.address : 'null'} 
     </>
   )
 }
