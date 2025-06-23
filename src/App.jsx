@@ -17,7 +17,7 @@ function App() {
     });
 
     const data = await response.json();
-    //console.log(data)
+    console.log(data)
     setWeatherInfo(data)
   } catch (error) {
     console.error(error);
@@ -39,7 +39,11 @@ function App() {
         <button type="submit">Buscar</button>
       </form>
 
-      {weatherInfo ? weatherInfo.address : 'null'} 
+      <p>{weatherInfo ? weatherInfo.address : null}</p>
+      <p>{weatherInfo ? weatherInfo.currentConditions.temp : null} ºC</p>
+      <p>Windspeed: {weatherInfo ? weatherInfo.currentConditions.windspeed : null}</p>
+      <p>{weatherInfo ? weatherInfo.currentConditions.conditions : null}</p>
+       
     </>
   )
 }
