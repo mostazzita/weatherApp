@@ -9,7 +9,7 @@ function App() {
     e.preventDefault()
 
     try {
-    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=Y25YYAL25FWSHQ2Y73MYKPR2E&contentType=json`, {
+    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${"2025-06-22"}/${"2025-06-24"}?unitGroup=metric&key=Y25YYAL25FWSHQ2Y73MYKPR2E&contentType=json`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +43,16 @@ function App() {
       <p>{weatherInfo ? `${weatherInfo.currentConditions.temp} ºC` : null}</p>
       <p>{weatherInfo ? `Windspeed: ${weatherInfo.currentConditions.windspeed}` : null}</p>
       <p>{weatherInfo ? weatherInfo.currentConditions.conditions : null}</p>
-       
+      <hr />
+      <p>Clima de ayer</p>
+      <p>{weatherInfo ? `${weatherInfo.days[0].temp} ºC` : null}</p>
+      <p>{weatherInfo ? `Windspeed: ${weatherInfo.days[0].windspeed}` : null}</p>
+      <p>{weatherInfo ? weatherInfo.days[0].conditions : null}</p>
+      <hr />
+      <p>Clima de mañana</p>
+      <p>{weatherInfo ? `${weatherInfo.days[1].temp} ºC` : null}</p>
+      <p>{weatherInfo ? `Windspeed: ${weatherInfo.days[1].windspeed}` : null}</p>
+      <p>{weatherInfo ? weatherInfo.days[1].conditions : null}</p>
     </>
   )
 }
