@@ -40,8 +40,8 @@ function App() {
       </form>
 
       <p>{weatherInfo ? weatherInfo.address : null}</p>
-      <p>{weatherInfo ? weatherInfo.currentConditions.temp : null} ºC</p>
-      <p>Windspeed: {weatherInfo ? weatherInfo.currentConditions.windspeed : null}</p>
+      <p>{weatherInfo ? `${weatherInfo.currentConditions.temp} ºC` : null}</p>
+      <p>{weatherInfo ? `Windspeed: ${weatherInfo.currentConditions.windspeed}` : null}</p>
       <p>{weatherInfo ? weatherInfo.currentConditions.conditions : null}</p>
        
     </>
