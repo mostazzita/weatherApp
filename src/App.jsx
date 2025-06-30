@@ -1,15 +1,20 @@
 import { useState } from "react"
+import { currentDate, tomorrowDate } from "./utils/date-formatting"
 
 function App() {
 
   const [location, setLocation] = useState('')
   const [weatherInfo, setWeatherInfo] = useState(null)
 
+  const handleRefresh = () => {
+    window.location.reload()
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${"2025-06-22"}/${"2025-06-24"}?unitGroup=metric&key=Y25YYAL25FWSHQ2Y73MYKPR2E&contentType=json`, {
+    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${currentDate}/${tomorrowDate}?unitGroup=metric&key=Y25YYAL25FWSHQ2Y73MYKPR2E&contentType=json`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -50,9 +55,11 @@ function App() {
       <p>{weatherInfo ? weatherInfo.days[0].conditions : null}</p>
       <hr />
       <p>Clima de mañana</p>
-      <p>{weatherInfo ? `${weatherInfo.days[1].temp} ºC` : null}</p>
-      <p>{weatherInfo ? `Windspeed: ${weatherInfo.days[1].windspeed}` : null}</p>
-      <p>{weatherInfo ? weatherInfo.days[1].conditions : null}</p>
+      <p>{weatherInfo ? `${weatherInfo.days[2].temp} ºC` : null}</p>
+      <p>{weatherInfo ? `Windspeed: ${weatherInfo.days[2].windspeed}` : null}</p>
+      <p>{weatherInfo ? weatherInfo.days[2].conditions : null}</p>
+
+      <button onClick={handleRefresh}>Refrescar</button>
     </>
   )
 }
