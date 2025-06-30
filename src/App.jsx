@@ -6,10 +6,6 @@ function App() {
   const [location, setLocation] = useState('')
   const [weatherInfo, setWeatherInfo] = useState(null)
 
-  const handleRefresh = () => {
-    window.location.reload()
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -59,7 +55,7 @@ function App() {
       <p>{weatherInfo ? `Windspeed: ${weatherInfo.days[2].windspeed}` : null}</p>
       <p>{weatherInfo ? weatherInfo.days[2].conditions : null}</p>
 
-      <button onClick={handleRefresh}>Refrescar</button>
+      <button onClick={handleSubmit}>Refrescar</button>
     </>
   )
 }
